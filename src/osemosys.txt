@@ -681,7 +681,7 @@ s.t. RM3_ReserveMargin_Constraint{r in REGION, l in TIMESLICE, y in YEAR: Reserv
 #########   		RE Production Target		############## NTS: Should change demand for production
 
 #
-s.t. RE1_FuelProductionByTechnologyAnnual{r in REGION, t in TECHNOLOGY, f in FUEL, y in YEAR: sum{m in MODE_OF_OPERATION} OutputActivityRatio[r,t,f,m,y] > 0}:
+s.t. RE1_FuelProductionByTechnologyAnnual{r in REGION, t in TECHNOLOGY, f in FUEL, y in YEAR: sum{m in MODE_OF_OPERATION} OutputActivityRatio[r,t,f,m,y] <> 0}:
 	sum{l in TIMESLICE} ProductionByTechnology[r,l,t,f,y] = ProductionByTechnologyAnnual[r,t,f,y];
 s.t. RE2_TechIncluded{r in REGION, y in YEAR}: sum{t in TECHNOLOGY, f in FUEL} ProductionByTechnologyAnnual[r,t,f,y] * RETagTechnology[r,t,y] = TotalREProductionAnnual[r,y];
 s.t. RE3_FuelIncluded{r in REGION, y in YEAR}: sum{l in TIMESLICE, f in FUEL} RateOfProduction[r,l,f,y]*YearSplit[l,y] * RETagFuel[r,f,y] = RETotalProductionOfTargetFuelAnnual[r,y];
